@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>todoList</title>
+</head>
+<body>
+	<div id="list">
+		<input type="text" v-model="newitem" v-on:keyup.enter="newList">
+		<ul>
+			<li>{{newitem}}</li>
+			<li v-for="i in items">
+				{{i.text}}
+			</li>
+		</ul>
+	</div>
+	<hr>
+	<div id="app">
+		<div v-if='hello'>{{msg}}</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el:"#list",
+		data:{
+			newitem:'',
+			items:[
+				{text:'todotodo'}
+			]
+		},
+		methods:{
+			newList:function(){
+				
+				var oVal = this.newitem;
+				console.log(this.newitem);
+				if (oVal){
+					this.items.push({text:oVal});
+					this.newitem = '';
+				};
+			}
+		}
+	})
+
+	var a = new Vue({
+		el:'#app',
+		data:{
+			hello:false,
+			msg:'vue 不错呀'
+		}
+	})
+</script>
+</html>

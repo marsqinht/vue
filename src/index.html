@@ -11,6 +11,20 @@
 		<p>{{msg}}</p>
 		<input type="text" v-model='msg'>
 	</div>
+	<hr>
+	<div id="todo">
+		<ul>
+			<li v-for="i in data">
+				{{i.id}}
+				<p>{{i.name}}</p>
+			</li>
+		</ul>
+	</div>
+	<hr>
+	<div class="abc">
+		<div>{{msg}}</div>
+		<button v-on:click="test">倒过来吧</button>
+	</div>
 	<script type="text/javascript" src="../js/vue.js"></script>
 	<script type="text/javascript">
 		new Vue({
@@ -25,6 +39,31 @@
 				msg:'数据双向绑定'
 			}
 		})
+
+		new Vue({
+			el:"#todo",
+			data: {
+			    total:3,
+			    data:[
+			    	{id:123,name:"a"},
+			    	{id:124,name:"b"}
+			    ],
+			    susess:true
+			  }
+		})
+
+		new Vue({
+			el:'.abc',
+			data:{
+				msg:'倒过来'
+			},
+			methods:{
+				test:function(){
+					this.msg = this.msg.split('').reverse().join('')
+				}
+			}
+		})
+
 	</script>
 </body>
 </html>
