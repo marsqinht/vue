@@ -16,7 +16,27 @@
 	</div>
 	<hr>
 	<div id="app">
-		<div v-if='hello'>{{msg}}</div>
+		<!-- <div v-if='hello'>{{msg}}</div> -->
+		<div v-if='hello'>{{*msg}}</div>
+		<div id="list-{{msg}}">{{{msg?'h':'o'}}}</div>
+	</div>
+	<hr>
+	<div id="app2" @click='doit'>
+		<div>{{ok?ok.ko:'s'}}</div>
+	</div>
+	<hr>
+	<div id="app3">
+		<div>
+			a:{{a}}  b:{{b}}
+		</div>
+	</div>
+	<hr>
+	<div id="app4" :class=['bbb']>
+		<div>
+		{{full}}
+		</div>
+		<h1 v-if='is'>ok</h1>
+		<h1 v-else>oo</h1>
 	</div>
 </body>
 <script type="text/javascript" src="../js/vue.js"></script>
@@ -45,9 +65,52 @@
 	var a = new Vue({
 		el:'#app',
 		data:{
-			hello:false,
+			hello:true,
 			msg:'vue 不错呀'
 		}
+	})
+
+	var b = new Vue({
+		el:'#app2',
+		data:{
+			ok:{
+				ko:'yes,you got it!'
+			}
+		},
+		methods:{
+			doit:function(){
+				alert(1);
+			}
+		}
+	})
+
+	var c = new Vue({
+		el:'#app3',
+		data:{
+			a:1
+		},
+		computed:{
+			b:function(){
+				console.log(this)
+				return this.a+1;
+			}
+		}
+	})
+
+	var name1 = new Vue({
+		el:'#app4',
+		data:{
+			f:'Mars',
+			l:'Qin',
+			full:'Mars Qin',
+			is:false
+		}
+	})
+	name1.$watch('f',function(val){
+		this.full = val + ' ' + this.l;
+	})
+	name1.$watch('l',function(val){
+		this.full = this.f+' '+val;
 	})
 </script>
 </html>
